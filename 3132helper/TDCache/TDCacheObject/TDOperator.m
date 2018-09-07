@@ -282,17 +282,22 @@
 }
 
 //根据主键，获取一条记录
--(BOOL)findOneWithPrimaryId:(NSInteger) primaryId{
+-(NSObject *)findOneWithPrimaryId:(NSInteger) primaryId{
     //    NSString *cond = [NSString stringWithFormat: @" AND %@ = %ld", self.primaryField, primaryId];
     NSString *sqlCmd = [NSString stringWithFormat:@"select * from %@ where 1 = 1 and %@ like '%ld'  limit   1",self.tableName,self.primaryField,primaryId];
     
     NSArray *arr = [self findWithSql:sqlCmd];
     
-    [self setAttributes:[arr firstObject]];
+//    [self setAttributes:[arr firstObject]];
     
+    NSArray *dataArr;
+    if (self.obj) {
+        dataArr = [[self.obj class] modelsWithList:arr];
+    }else{
+        dataArr = [TDOperator modelsWithList:arr];
+    }
     
-    
-    return YES;
+    return [dataArr firstObject];
 }
 
 //根据一对键值查找数据

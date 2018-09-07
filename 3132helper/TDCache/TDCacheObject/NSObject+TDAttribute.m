@@ -76,7 +76,12 @@
         
         [mDic setObject:propertyName forKey:@"propertyName"];
         id propertyValue = [obj valueForKey:propertyName];
-        if (propertyValue) [mDic setObject:propertyValue forKey:@"propertyValue"];
+        if (propertyValue) {
+            [mDic setObject:propertyValue forKey:@"propertyValue"];
+            
+        }else{
+            [mDic setObject:@"" forKey:@"propertyValue"];
+        }
         
         const char *charProperty = property_getAttributes(property);
         NSString *propertyType = [NSString stringWithUTF8String:charProperty];

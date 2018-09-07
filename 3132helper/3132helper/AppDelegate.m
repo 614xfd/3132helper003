@@ -40,6 +40,10 @@
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self configureBoardManager];
+    self.window.rootViewController = [self rootController];
+    return YES;
+    
     
     dispatch_queue_t queue = dispatch_queue_create("sdfj", DISPATCH_QUEUE_CONCURRENT);
      dispatch_async(queue, ^{

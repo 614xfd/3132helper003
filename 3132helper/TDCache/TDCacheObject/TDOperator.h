@@ -50,7 +50,7 @@
 - (NSArray *)returnAllData;
 
 //根据主键，获取一条记录
--(BOOL)findOneWithPrimaryId:(NSInteger) primaryId;
+-(NSObject *)findOneWithPrimaryId:(NSInteger) primaryId;
 //根据一对键值查找数据
 - (NSArray *)findOneWithValue:(NSString *)value forKey:(NSString *)key;
 
