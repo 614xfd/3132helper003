@@ -32,6 +32,8 @@
 #define ColorList @[[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor cyanColor],[UIColor yellowColor],[UIColor orangeColor],[UIColor purpleColor],[UIColor brownColor],[UIColor lightGrayColor]]
 
 
+#define ScheduleList @"ScheduleList"
+#define ScheduleInfo @"ScheduleInfo"
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

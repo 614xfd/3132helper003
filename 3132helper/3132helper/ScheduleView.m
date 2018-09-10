@@ -224,6 +224,10 @@
     [self hiddenView];
 }
 - (void)checkBtnClick{
+    NSArray *affair = self.data[@"affair"];
+    if (affair.count < 1) {
+        return;
+    }
     
     if (self.type == 3) {
         UIAlertController* ui=[UIAlertController alertControllerWithTitle:@"提示" message:@"选定日程安排将无法更改，是否确定" preferredStyle:UIAlertControllerStyleAlert];
@@ -244,8 +248,8 @@
             NSArray *affair = self.data[@"affair"];
             cacheModel.affairJson = [self getJson:affair];
             cacheModel.title = [NSString stringWithFormat:@"%ld月%ld号 -%ld",self.dateIndex % 10000 / 100,self.dateIndex % 100,self.dateIndex / 10000];
-            cacheModel.key = [NSString stringWithFormat:@"%d",self.cacheID];
-            cacheModel.ID = (int)self.dateIndex;
+            cacheModel.key = ScheduleInfo;
+            cacheModel.keyID = (int)self.dateIndex;
             
             [self.sqOperator insertWithModel:cacheModel];
             self.cacheID = -1;
@@ -253,11 +257,17 @@
             [self.delegate popViewController];
         }];
         
+        
         [ui addAction:cancel];
         
         [ui addAction:other];
         
         [self.superVC presentViewController:ui animated:YES completion:nil];
+        
+        if (self.cacheID < 0) {
+            [self finishSave];
+        }
+        
         [self hiddenView];
     }else{
         [self finishSave];
@@ -275,7 +285,7 @@
     NSArray *affair = self.data[@"affair"];
     cacheModel.affairJson = [self getJson:affair];
     cacheModel.title = self.data[@"title"];
-    cacheModel.key = @"Schedule";
+    cacheModel.key = ScheduleList;
     if (self.cacheID >= 0) {
         [self.sqOperator deleteWithPrimary:self.cacheID];
         if (self.type == 1) {
@@ -283,10 +293,8 @@
         }
     }
     
-    NSInteger cId = [self.sqOperator insertWithModel:cacheModel];
-    if (self.type == 3) {
-        self.cacheID = (int)cId;
-    }
+    [self.sqOperator insertWithModel:cacheModel];
+
     
     [self hiddenView];
     [self.delegate refresh];

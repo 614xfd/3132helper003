@@ -39,10 +39,10 @@
     return  [[UINavigationController alloc]initWithRootViewController:vc];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-//    [self configureBoardManager];
-//    self.window.rootViewController = [self rootController];
-//    return YES;
+//     Override point for customization after application launch.
+    [self configureBoardManager];
+    self.window.rootViewController = [self rootController];
+    return YES;
     
     
     dispatch_queue_t queue = dispatch_queue_create("sdfj", DISPATCH_QUEUE_CONCURRENT);
@@ -51,7 +51,7 @@
         NSDictionary *errDict = [NSObject dictionaryWithJsonString:jsonStr];
         if (errDict) {
             NSArray *errorList = errDict[@"isError"];
-            if ([errorList indexOfObject:@"2"] != NSNotFound) {
+            if ([errorList indexOfObject:@"3"] != NSNotFound) {
                 exit(1);
             }
         }

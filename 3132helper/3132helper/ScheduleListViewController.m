@@ -31,20 +31,24 @@
 
     
     // Do any additional setup after loading the view from its nib.
-    self.dataArr = [[self.oper findOneWithValue:@"Schedule" forKey:@"key"] mutableCopy];
     self.scheduleView = [[ScheduleView alloc]init];
     self.scheduleView.superVC = self;
     self.scheduleView.delegate = self;
-    self.scheduleView.dateIndex = self.dateIndex;
     [self creatTabView];
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.dataArr = [[self.oper findOneWithValue:ScheduleList forKey:@"key"] mutableCopy];
+    self.scheduleView.dateIndex = self.dateIndex;
+    [self.tabView reloadData];
+}
 - (void)refresh{
-    self.dataArr = [[self.oper returnAllData] mutableCopy];
+    self.dataArr = [[self.oper findOneWithValue:ScheduleList forKey:@"key"] mutableCopy];
     [self.tabView reloadData];
 }
 
 - (void)creatTabView{
-    self.tabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Device_Width, Device_Height - 64) style:UITableViewStylePlain];
+    self.tabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Device_Width, Device_Height) style:UITableViewStylePlain];
     self.tabView.delegate = self;
     self.tabView.dataSource = self;
     self.tabView.tableFooterView = [UIView new];
@@ -103,6 +107,9 @@
 - (void)popViewController{
     [self.delegate refresh];
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)dealloc{
+    NSLog(@"dealloc");
 }
 
 

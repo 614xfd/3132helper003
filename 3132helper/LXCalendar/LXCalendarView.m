@@ -234,8 +234,8 @@
     
     
     NSInteger cId = model.year * 10000 + model.month * 100 + model.day;
-    
-    ScheduleObject *cacheModel = (ScheduleObject *)[self.sqOperator findOneWithPrimaryId:cId];
+//    cId
+    ScheduleObject *cacheModel = (ScheduleObject *)[self.sqOperator findOneWithValue:[NSString stringWithFormat:@"%ld",cId] forKey:@"keyID"].firstObject;
     
     if (cacheModel) {
         cell.scheduleObj = cacheModel;
