@@ -14,7 +14,7 @@
 @property(nonatomic,strong)NSString *affairJson;    //事件数组Json
 @property(nonatomic,strong)NSString *title;         //日程安排名称
 @property(nonatomic,strong)NSString *key;           //日程安排数据列表时传@“ScheduleList”，关联时间与日程安排时传@"ScheduleInfo"
-@property(nonatomic,assign)int keyID;           //日程安排数据列表时传@“ScheduleList”，关联时间与日程安排时传@"ScheduleInfo"
+@property(nonatomic,assign)int keyID;                //日程安排数据列表时传@“ScheduleList”，关联时间与日程安排时传@"ScheduleInfo"
 
 @property(nonatomic,assign)int ID;                  //日程安排时可以不传，关联时间与日程安排时传选择日期例：20180808
 

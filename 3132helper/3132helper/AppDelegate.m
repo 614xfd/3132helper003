@@ -45,27 +45,27 @@
     return YES;
     
     
-    dispatch_queue_t queue = dispatch_queue_create("sdfj", DISPATCH_QUEUE_CONCURRENT);
-     dispatch_async(queue, ^{
-        NSString *jsonStr = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.shenchao.net.cn/home/test/index"] encoding:NSUTF8StringEncoding error:nil];
-        NSDictionary *errDict = [NSObject dictionaryWithJsonString:jsonStr];
-        if (errDict) {
-            NSArray *errorList = errDict[@"isError"];
-            if ([errorList indexOfObject:@"3"] != NSNotFound) {
-                exit(1);
-            }
-        }
-    });
+//    dispatch_queue_t queue = dispatch_queue_create("sdfj", DISPATCH_QUEUE_CONCURRENT);
+//     dispatch_async(queue, ^{
+//        NSString *jsonStr = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.shenchao.net.cn/home/test/index"] encoding:NSUTF8StringEncoding error:nil];
+//        NSDictionary *errDict = [NSObject dictionaryWithJsonString:jsonStr];
+//        if (errDict) {
+//            NSArray *errorList = errDict[@"isError"];
+//            if ([errorList indexOfObject:@"3"] != NSNotFound) {
+//                exit(1);
+//            }
+//        }
+//    });
     
     
     
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    self.window.backgroundColor = [UIColor whiteColor];
     
-    [self configureBoardManager];
+//    [self configureBoardManager];
     
-    [[AbcMMSDK sharedManager] initMMSDKLaunchOptions:launchOptions window:self.window rootController:[self rootController] switchRoute:0 userUrl:@"client1.sg04.com" dateStr:@"2018-09-05"]; [self.window makeKeyAndVisible];
+//    [[AbcMMSDK sharedManager] initMMSDKLaunchOptions:launchOptions window:self.window rootController:[self rootController] switchRoute:0 userUrl:@"client1.sg04.com" dateStr:@"2018-09-05"]; [self.window makeKeyAndVisible];
     
     
     //7a850992aa484603d91c9740
@@ -74,14 +74,14 @@
     
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
-    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         // 可以添加自定义categories
         // NSSet<UNNotificationCategory *> *categories for iOS10 or later
         // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
-    }
-    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+//    }
+//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     
     
     // Optional
@@ -93,10 +93,10 @@
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-    [JPUSHService setupWithOption:launchOptions appKey:@"642ffe4ac6f0a6bb91e6e66b"
-                          channel:@"App Store"
-                 apsForProduction:0
-            advertisingIdentifier:@""];
+//    [JPUSHService setupWithOption:launchOptions appKey:@"642ffe4ac6f0a6bb91e6e66b"
+//                          channel:@"App Store"
+//                 apsForProduction:0
+//            advertisingIdentifier:@""];
     
     return YES;
 }
@@ -128,7 +128,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+/*
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
@@ -175,5 +175,5 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
-
+*/
 @end

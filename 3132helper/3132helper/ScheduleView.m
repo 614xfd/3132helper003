@@ -13,9 +13,31 @@
 - (id)init{
     if (self = [super init]) {
         self.cacheID = -1;
+        // 键盘出现的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+        // 键盘消失的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
+
     }
     return self;
 }
+#pragma mark -键盘监听方法
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.frame = CGRectMake(self.frame.origin.x,self.origin_y - 200,self.frame.size.width,self.frame.size.height);
+    }];
+   
+}
+- (void)keyboardWillBeHiden:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.frame = CGRectMake(self.frame.origin.x,self.origin_y,self.frame.size.width,self.frame.size.height);
+    }];
+    
+}
+
+
 
 /**
  显示日程详情
@@ -132,6 +154,7 @@
     
     CGFloat H = 20 + 30 + 20 + (30 + 10) * (type == 1 || !isFinish? affair.count:affair.count + 1) + 10 + 50;
     self.frame = CGRectMake(5, (Device_Height - H) / 2.0, self.frame.size.width, H);
+    self.origin_y = self.frame.origin.y;
 }
 - (UIImage*) createImageWithColor: (UIColor*) color
 {
@@ -286,6 +309,7 @@
     cacheModel.affairJson = [self getJson:affair];
     cacheModel.title = self.data[@"title"];
     cacheModel.key = ScheduleList;
+    cacheModel.keyID = 0;
     if (self.cacheID >= 0) {
         [self.sqOperator deleteWithPrimary:self.cacheID];
         if (self.type == 1) {
@@ -295,7 +319,6 @@
     
     [self.sqOperator insertWithModel:cacheModel];
 
-    
     [self hiddenView];
     [self.delegate refresh];
 }

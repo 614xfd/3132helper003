@@ -178,6 +178,29 @@
     ScheduleObject *obj = self.dataArr[indexPath.row];
     [self.opListView showViewWithData:obj];
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (self.dataArr.count == 0) {
+        return Device_Height;
+    }
+    return  0.1;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (self.dataArr.count > 0) {
+        return [UIView new];
+    }
+    
+    UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc]init];
+    
+    UIImageView *imgV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"nodata"]];
+    imgV.frame = CGRectMake((self.view.frame.size.width - 80) / 2.0, 200, 80, 80);
+    [headerView addSubview:imgV];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(50, 290, self.view.frame.size.width - 50 * 2, 30)];
+    lab.text = @"当前没有日程安排";
+    lab.textAlignment = NSTextAlignmentCenter;
+    [headerView addSubview:lab];
+    
+    return headerView;
+}
 
 
 - (void)refresh{

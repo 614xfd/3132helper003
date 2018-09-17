@@ -34,7 +34,7 @@
 @property (nonatomic, assign)int type;                          //界面类型 1、显示详情 2、新增  3、为指定日期选定日程安排
 @property (nonatomic, strong)NSMutableDictionary *data;         //界面数据  {@"title":"工作日安排（周一）",@"affair":[@{@"name":"舞蹈班",@"completeness":@"0.3",@"colour":@"1"},@{@"name":"舞蹈班",@"completeness":@"0.5",@"colour":@"1"}]}
 
-
+@property (nonatomic, assign)CGFloat origin_y;
 - (id)init;
 /**
  显示日程详情
